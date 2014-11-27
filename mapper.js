@@ -16,7 +16,12 @@ d3.mapper = function module() {
       return this;
     }
 
+    exports._getArray = function() {
+      return this;
+    }
+
     exports.array = function(_a, _id) {
+      if (!arguments.length) return this._getArray;
       _id = typeof _id !== 'undefined' ? _id : 'id';
       //TODO: check if all arrays have the same keys
       //TODO: returns an array representation of the mapper when _a is not specified
