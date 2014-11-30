@@ -11,15 +11,6 @@ d3.mapper = function module() {
     	return this;
     }
 
-    exports.maps = function(_x){
-      if (!arguments.length) return _maps;
-      return this;
-    }
-
-    exports._getArray = function() {
-      return this;
-    }
-
     exports.array = function(_a, _id) {
       if (!arguments.length) return this._getArray;
       _id = typeof _id !== 'undefined' ? _id : 'id';
