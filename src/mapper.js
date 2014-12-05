@@ -1,9 +1,9 @@
-d3.mapper = function() {
-  var m = new d3_mapper;
+d3.atlas.mapper = function() {
+  var m = new d3_atlas_mapper;
   return m;
 }
 
-function d3_mapper() {
+function d3_atlas_mapper() {
 
 	var _maps = {};
 
