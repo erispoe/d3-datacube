@@ -6,7 +6,9 @@ d3.atlas.mapper = function() {
 function d3_atlas_mapper() {
 
 	var _maps = {},
-      _keys = [];
+      _keys = [],
+      _ySeparator = '_',
+      _idColumn = 'id';
 
 	function exports() {}
     
@@ -48,6 +50,24 @@ function d3_atlas_mapper() {
     }
 
     /**
+    * Get and set the year separator
+    **/
+    exports.ySeparator = function(_x) {
+      if(!arguments.length) return _ySeparator;
+      _ySeparator = _x;
+      return this;
+    }
+
+    /**
+    * Get and set the id column name
+    **/
+    exports.idColumn = function(_x) {
+      if(!arguments.length) return _idColumn;
+      _idColumn = _x;
+      return this;
+    }
+
+    /**
     * Returns an array representation of all the values
     **/
     exports.values = function() {
@@ -80,6 +100,7 @@ function d3_atlas_mapper() {
       // Make individual maps and add them to the mapper with corresponding values and years
       for (var i = 0; i < keys.length; i++) {
         _v = keys[i];
+        console.log(_v);
         _o = {};
         for (var j = 0; j < _a.length; j++) {
           _o[_a[j][_id]] = _a[j][_v];
