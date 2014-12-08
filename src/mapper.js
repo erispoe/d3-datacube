@@ -83,18 +83,17 @@ function d3_atlas_mapper() {
       return _V
     }
 
-    exports.array = function(_a, _id) {
+    exports.array = function(_a) {
       // Create the mapper object from an array representation
       if (!arguments.length) return this._getArray;
-      _id = typeof _id !== 'undefined' ? _id : 'id';
       //TODO: check if all arrays have the same keys
       //TODO: returns an array representation of the mapper when _a is not specified
       var keys = Object.keys(_a[0]);
-      keys.splice(keys.indexOf(_id), 1);
+      keys.splice(keys.indexOf(_idColumn), 1);
 
       // Extract keys
       for (var i = 0; i < _a.length; i++) {
-        _keys.push(_a[i][_id]);
+        _keys.push(_a[i][_idColumn]);
       };
 
       // Make individual maps and add them to the mapper with corresponding values and years
@@ -103,7 +102,7 @@ function d3_atlas_mapper() {
         console.log(_v);
         _o = {};
         for (var j = 0; j < _a.length; j++) {
-          _o[_a[j][_id]] = _a[j][_v];
+          _o[_a[j][_idColumn]] = _a[j][_v];
         };
         _m = d3.map(_o);
         this.add(_m, _v);
