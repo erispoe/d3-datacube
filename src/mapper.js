@@ -97,15 +97,32 @@ function d3_atlas_mapper() {
       };
 
       // Make individual maps and add them to the mapper with corresponding values and years
+      
       for (var i = 0; i < keys.length; i++) {
-        _v = keys[i];
-        console.log(_v);
-        _o = {};
+        var _n = keys[i],
+            _o = {},
+            _v,
+            _y;
+
+        // Check if there is a year info
+        if(_n.split(_ySeparator).length == 2) {
+          _v = _n.split(_ySeparator)[0];
+          _y = _n.split(_ySeparator)[1];
+        } else {
+          _v = _n;
+        }
+
         for (var j = 0; j < _a.length; j++) {
           _o[_a[j][_idColumn]] = _a[j][_v];
         };
         _m = d3.map(_o);
-        this.add(_m, _v);
+        
+        if(_y){
+          this.add(_m, _v, _y);
+        } else {
+          this.add(_m, _v);
+        };
+        
       };
       return this;
     }
