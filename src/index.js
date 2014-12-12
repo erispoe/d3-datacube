@@ -1,6 +1,5 @@
 d3.atlas = {};
 
-
 // Compare the keys of 2 arrays
 Array.prototype.compare = function(testArr) {
     if (this.length != testArr.length) return false;

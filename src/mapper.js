@@ -8,7 +8,8 @@ function d3_atlas_mapper() {
 	var _maps = {},
       _keys = [],
       _ySeparator = '_',
-      _idColumn = 'id';
+      _idColumn = 'id',
+      _menu;
 
 	function exports() {}
     
@@ -64,6 +65,16 @@ function d3_atlas_mapper() {
     exports.idColumn = function(_x) {
       if(!arguments.length) return _idColumn;
       _idColumn = _x;
+      return this;
+    }
+
+    /**
+    * Get and set the menu
+    **/
+    exports.menu = function(_x) {
+      if(!arguments.length) return _menu ;
+      _menu = _x;
+      if(!_menu.mapper() != this) _menu.mapper(this) ;
       return this;
     }
 
