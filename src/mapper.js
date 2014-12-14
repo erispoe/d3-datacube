@@ -9,7 +9,9 @@ function d3_atlas_mapper() {
       _keys = [],
       _ySeparator = '_',
       _idColumn = 'id',
-      _menu;
+      _menu = new d3.atlas.menu();
+
+  _menu.mapper(exports);
 
 	function exports() {}
     
@@ -24,7 +26,8 @@ function d3_atlas_mapper() {
     	_y = typeof _y !== 'undefined' ? _y : 'null';
       if(!_maps[_v]){_maps[_v] = {}}
       _maps[_v][_y] = _m;
-    	return this;
+    	_menu.update();
+      return this;
     }
 
     /**
@@ -33,15 +36,15 @@ function d3_atlas_mapper() {
     exports.mergeWith = function(_m) {
       if(!_m.keys().compare(this.keys())){return this};
       // Extract and add all the d3.map from the new mapper _m
-      for (var i = 0; i < Object.keys(_m.values()).length; i++) {
-        var _v = Object.keys(_m.values())[i];
-        for (var j = 0; j < _m.values()[_v].length; j++) {
-          var _y = _m.values()[_v][j];
+      for (var i = 0; i < Object.keys(_m.variables()).length; i++) {
+        var _v = Object.keys(_m.variables())[i];
+        for (var j = 0; j < _m.variables()[_v].length; j++) {
+          var _y = _m.variables()[_v][j];
           var map = _m.get(_v, _y);
           this.add(map, _v, _y);
         };
       };
-    }
+    };
 
     /**
     * Returns the ids, the keys
@@ -71,17 +74,14 @@ function d3_atlas_mapper() {
     /**
     * Get and set the menu
     **/
-    exports.menu = function(_x) {
-      if(!arguments.length) return _menu ;
-      _menu = _x;
-      if(!_menu.mapper() != this) _menu.mapper(this) ;
-      return this;
+    exports.menu = function() {
+      return _menu;
     }
 
     /**
     * Returns an array representation of all the values
     **/
-    exports.values = function() {
+    exports.variables = function() {
       var _V = {}
       for (var i = 0; i < Object.keys(_maps).length; i++) {
         var _v = Object.keys(_maps)[i];
@@ -124,7 +124,7 @@ function d3_atlas_mapper() {
         }
 
         for (var j = 0; j < _a.length; j++) {
-          _o[_a[j][_idColumn]] = _a[j][_v];
+          _o[_a[j][_idColumn]] = parseFloat(_a[j][_n]);
         };
         _m = d3.map(_o);
         
@@ -143,6 +143,10 @@ function d3_atlas_mapper() {
       _y = typeof _y !== 'undefined' ? _y : 'null';
       if(_maps[_v][_y]){return _maps[_v][_y]};
       return this;
+    }
+
+    exports._maps = function(){
+      return _maps;
     }
 
 	return exports;
