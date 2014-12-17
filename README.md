@@ -1,7 +1,7 @@
-d3-mapper
+d3-atlas
 =========
 
-A serialized map object for d3js
+Making visualization of series data easier with d3.js
 
 [D3.js](http://d3js.org/) provides [d3.map](https://github.com/mbostock/d3/wiki/Arrays#maps) objects to create safe key-value associative arrays.
 
