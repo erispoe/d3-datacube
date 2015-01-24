@@ -5,7 +5,7 @@ d3.atlas.menu = function() {
 
 function d3_atlas_menu() {
 
-	var _mapper,
+	var _cube,
 		_variableId,
 		_yearId,
 		_updater = function(){};
@@ -31,11 +31,11 @@ function d3_atlas_menu() {
 	};
 
 	/**
-    * Get and set the mapper
+    * Get and set the cube
     **/
-    exports.mapper = function(_x) {
-      if(!arguments.length) return _mapper ;
-      _mapper = _x;
+    exports.cube = function(_x) {
+      if(!arguments.length) return _cube ;
+      _cube = _x;
       return this;
     }
 
@@ -61,7 +61,7 @@ function d3_atlas_menu() {
 
     	d3.select("#" + _variableId)
     		.selectAll("option")
-    		.data(Object.keys(_mapper.variables()))
+    		.data(Object.keys(_cube.variables()))
     		.enter()
     		.append("option")
     		.attr("value", function(d) { return d; })
@@ -87,7 +87,7 @@ function d3_atlas_menu() {
 
 		d3.select("#" + _yearId)
     		.selectAll("option")
-    		.data(_mapper.variables()[sel.options[sel.selectedIndex].value])
+    		.data(_cube.variables()[sel.options[sel.selectedIndex].value])
     		.enter()
     		.append("option")
     		.attr("value", function(d) { return d; })
@@ -110,7 +110,7 @@ function d3_atlas_menu() {
     	var _v = _vSel.options[_vSel.selectedIndex].value,
     		_y = _ySel.options[_ySel.selectedIndex].value;
     		
-    	return mapper.get(_v, _y);
+    	return cube.get(_v, _y);
     }
 
 	return exports;

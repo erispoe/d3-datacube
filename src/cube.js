@@ -1,9 +1,9 @@
-d3.atlas.mapper = function() {
-  var m = new d3_atlas_mapper;
+d3.atlas.cube = function() {
+  var m = new d3_atlas_cube;
   return m;
 }
 
-function d3_atlas_mapper() {
+function d3_atlas_cube() {
 
 	var _maps = {},
       _keys = [],
@@ -11,16 +11,16 @@ function d3_atlas_mapper() {
       _idColumn = 'id',
       _menu = new d3.atlas.menu();
 
-  _menu.mapper(exports);
+  _menu.cube(exports);
 
 	function exports() {}
     
     /**
-    * Adds a d3.map to the mapper
-    * @param {d3.map} _m - The d3.map to add to the mapper
+    * Adds a d3.map to the cube
+    * @param {d3.map} _m - The d3.map to add to the cube
     * @param {string} _v - The name of the variable mapped in the d3.map
     * @param {d3.map} _y - The year or numerical series oredring of the variable mapped in the d3.map
-    * @return {d3.atlas.mapper} - The d3.atlas.mapper with the d3.map added to it
+    * @return {d3.atlas.cube} - The d3.atlas.cube with the d3.map added to it
     **/
     exports.add = function(_m, _v, _y) {
     	_y = typeof _y !== 'undefined' ? _y : 'null';
@@ -31,11 +31,11 @@ function d3_atlas_mapper() {
     }
 
     /**
-    * Merge a d3.atlas.mapper object with another one, provided they have the same keys
+    * Merge a d3.atlas.cube object with another one, provided they have the same keys
     **/
     exports.mergeWith = function(_m) {
       if(!_m.keys().compare(this.keys())){return this};
-      // Extract and add all the d3.map from the new mapper _m
+      // Extract and add all the d3.map from the new cube _m
       for (var i = 0; i < Object.keys(_m.variables()).length; i++) {
         var _v = Object.keys(_m.variables())[i];
         for (var j = 0; j < _m.variables()[_v].length; j++) {
@@ -95,10 +95,10 @@ function d3_atlas_mapper() {
     }
 
     exports.array = function(_a) {
-      // Create the mapper object from an array representation
+      // Create the cube object from an array representation
       if (!arguments.length) return this._getArray;
       //TODO: check if all arrays have the same keys
-      //TODO: returns an array representation of the mapper when _a is not specified
+      //TODO: returns an array representation of the cube when _a is not specified
       var keys = Object.keys(_a[0]);
       keys.splice(keys.indexOf(_idColumn), 1);
 
@@ -107,7 +107,7 @@ function d3_atlas_mapper() {
         _keys.push(_a[i][_idColumn]);
       };
 
-      // Make individual maps and add them to the mapper with corresponding values and years
+      // Make individual maps and add them to the cube with corresponding values and years
       
       for (var i = 0; i < keys.length; i++) {
         var _n = keys[i],
@@ -143,10 +143,6 @@ function d3_atlas_mapper() {
       _y = typeof _y !== 'undefined' ? _y : 'null';
       if(_maps[_v][_y]){return _maps[_v][_y]};
       return this;
-    }
-
-    exports._maps = function(){
-      return _maps;
     }
 
 	return exports;
