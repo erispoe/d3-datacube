@@ -1,26 +1,26 @@
-d3.atlas.cube = function() {
-  var m = new d3_atlas_cube;
+d3.datacube = function() {
+  var m = new d3_datacube;
   return m;
 }
 
-function d3_atlas_cube() {
+function d3_datacube() {
 
 	var _maps = {},
       _keys = [],
       _ySeparator = '_',
       _idColumn = 'id',
-      _menu = new d3.atlas.menu();
+      _menu = new d3.datacube.menu();
 
-  _menu.cube(exports);
+  _menu.datacube(exports);
 
 	function exports() {}
     
     /**
-    * Adds a d3.map to the cube
+    * Adds a d3.map to the datacube
     * @param {d3.map} _m - The d3.map to add to the cube
     * @param {string} _v - The name of the variable mapped in the d3.map
     * @param {d3.map} _y - The year or numerical series oredring of the variable mapped in the d3.map
-    * @return {d3.atlas.cube} - The d3.atlas.cube with the d3.map added to it
+    * @return {d3.datacube} - The d3.atlas.cube with the d3.map added to it
     **/
     exports.add = function(_m, _v, _y) {
     	_y = typeof _y !== 'undefined' ? _y : 'null';
@@ -31,11 +31,11 @@ function d3_atlas_cube() {
     }
 
     /**
-    * Merge a d3.atlas.cube object with another one, provided they have the same keys
+    * Merge a d3.datacube object with another one, provided they have the same keys
     **/
     exports.mergeWith = function(_m) {
       if(!_m.keys().compare(this.keys())){return this};
-      // Extract and add all the d3.map from the new cube _m
+      // Extract and add all the d3.map from the new datacube _m
       for (var i = 0; i < Object.keys(_m.variables()).length; i++) {
         var _v = Object.keys(_m.variables())[i];
         for (var j = 0; j < _m.variables()[_v].length; j++) {

@@ -1,11 +1,11 @@
-d3.atlas.menu = function() {
-  var m = new d3_atlas_menu;
+d3.datacube.menu = function() {
+  var m = new d3_datacube_menu;
   return m;
 }
 
-function d3_atlas_menu() {
+function d3_datacube_menu() {
 
-	var _cube,
+	var _datacube,
 		_variableId,
 		_yearId,
 		_updater = function(){};
@@ -31,11 +31,11 @@ function d3_atlas_menu() {
 	};
 
 	/**
-    * Get and set the cube
+    * Get and set the datacube
     **/
-    exports.cube = function(_x) {
-      if(!arguments.length) return _cube ;
-      _cube = _x;
+    exports.datacube = function(_x) {
+      if(!arguments.length) return _datacube ;
+      _datacube = _x;
       return this;
     }
 
@@ -61,7 +61,7 @@ function d3_atlas_menu() {
 
     	d3.select("#" + _variableId)
     		.selectAll("option")
-    		.data(Object.keys(_cube.variables()))
+    		.data(Object.keys(_datacube.variables()))
     		.enter()
     		.append("option")
     		.attr("value", function(d) { return d; })
@@ -87,7 +87,7 @@ function d3_atlas_menu() {
 
 		d3.select("#" + _yearId)
     		.selectAll("option")
-    		.data(_cube.variables()[sel.options[sel.selectedIndex].value])
+    		.data(_datacube.variables()[sel.options[sel.selectedIndex].value])
     		.enter()
     		.append("option")
     		.attr("value", function(d) { return d; })
